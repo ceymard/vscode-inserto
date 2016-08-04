@@ -20,7 +20,12 @@ export function activate(context: vscode.ExtensionContext) {
         // Display a message box to the user
         let ed = vscode.window.activeTextEditor
         ed.edit(edit => {
-            edit.insert(ed.selection.active, 'ᐅ')
+            ed.selections.forEach(sel => {
+                edit.insert(sel.active, 'ᐅ')
+                edit.delete(sel)
+                // edit.replace(sel, 'ᐅ')
+            })
+            // edit.insert(ed.selection.active, 'ᐅ')
         })
     });
 
